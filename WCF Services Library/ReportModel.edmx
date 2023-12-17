@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="reportsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="reportsModelStoreContainer">
+          <EntitySet Name="Administrators" EntityType="reportsModel.Store.Administrators" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Managements" EntityType="reportsModel.Store.Managements" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Photos" EntityType="reportsModel.Store.Photos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Reports" EntityType="reportsModel.Store.Reports" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Managements__fid__15502E78" Association="reportsModel.Store.FK__Managements__fid__15502E78">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Managements" EntitySet="Managements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photos__fid__1273C1CD" Association="reportsModel.Store.FK__Photos__fid__1273C1CD">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="radmin" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Managements">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rstat" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="rprio" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="rfreq" Type="int" Nullable="false" />
+          <Property Name="fid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rimage" Type="varbinary(max)" Nullable="false" />
+          <Property Name="fid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rtype" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="rown" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="rdesc" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="rloc" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="rtime" Type="datetime" Nullable="false" />
+          <Property Name="rlat" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="rlon" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="racc" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="rdir" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Managements__fid__15502E78">
+          <End Role="Reports" Type="reportsModel.Store.Reports" Multiplicity="1" />
+          <End Role="Managements" Type="reportsModel.Store.Managements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="Managements">
+              <PropertyRef Name="fid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photos__fid__1273C1CD">
+          <End Role="Reports" Type="reportsModel.Store.Reports" Multiplicity="1" />
+          <End Role="Photos" Type="reportsModel.Store.Photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="fid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="reportsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="reportsEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="reportsModel.Administrator" />
+          <EntitySet Name="Managements" EntityType="reportsModel.Management" />
+          <EntitySet Name="Photos" EntityType="reportsModel.Photo" />
+          <EntitySet Name="Reports" EntityType="reportsModel.Report" />
+          <AssociationSet Name="FK__Managements__fid__15502E78" Association="reportsModel.FK__Managements__fid__15502E78">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Managements" EntitySet="Managements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photos__fid__1273C1CD" Association="reportsModel.FK__Photos__fid__1273C1CD">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="radmin" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Management">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="rstat" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="rprio" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="rfreq" Type="Int32" Nullable="false" />
+          <Property Name="fid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="reportsModel.FK__Managements__fid__15502E78" FromRole="Managements" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="rimage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="fid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="reportsModel.FK__Photos__fid__1273C1CD" FromRole="Photos" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="rtype" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="rown" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="rdesc" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="rloc" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="rtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rlat" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="rlon" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="racc" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="rdir" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Managements" Relationship="reportsModel.FK__Managements__fid__15502E78" FromRole="Reports" ToRole="Managements" />
+          <NavigationProperty Name="Photos" Relationship="reportsModel.FK__Photos__fid__1273C1CD" FromRole="Reports" ToRole="Photos" />
+        </EntityType>
+        <Association Name="FK__Managements__fid__15502E78">
+          <End Role="Reports" Type="reportsModel.Report" Multiplicity="1" />
+          <End Role="Managements" Type="reportsModel.Management" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="Managements">
+              <PropertyRef Name="fid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photos__fid__1273C1CD">
+          <End Role="Reports" Type="reportsModel.Report" Multiplicity="1" />
+          <End Role="Photos" Type="reportsModel.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="fid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="reportsModelStoreContainer" CdmEntityContainer="reportsEntities">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="reportsModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrators">
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="radmin" ColumnName="radmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managements">
+            <EntityTypeMapping TypeName="reportsModel.Management">
+              <MappingFragment StoreEntitySet="Managements">
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="rstat" ColumnName="rstat" />
+                <ScalarProperty Name="rprio" ColumnName="rprio" />
+                <ScalarProperty Name="rfreq" ColumnName="rfreq" />
+                <ScalarProperty Name="fid" ColumnName="fid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="reportsModel.Photo">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="rimage" ColumnName="rimage" />
+                <ScalarProperty Name="fid" ColumnName="fid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="reportsModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="rtype" ColumnName="rtype" />
+                <ScalarProperty Name="rown" ColumnName="rown" />
+                <ScalarProperty Name="rdesc" ColumnName="rdesc" />
+                <ScalarProperty Name="rloc" ColumnName="rloc" />
+                <ScalarProperty Name="rtime" ColumnName="rtime" />
+                <ScalarProperty Name="rlat" ColumnName="rlat" />
+                <ScalarProperty Name="rlon" ColumnName="rlon" />
+                <ScalarProperty Name="racc" ColumnName="racc" />
+                <ScalarProperty Name="rdir" ColumnName="rdir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
